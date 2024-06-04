@@ -1,3 +1,4 @@
+import exception
 import filepath
 import gleam/list
 import gleam/string
@@ -5,6 +6,8 @@ import gleeunit
 import gleeunit/should
 import simplifile
 import temporary
+
+import cell
 
 pub fn main() {
   gleeunit.main()
@@ -21,19 +24,31 @@ pub fn create_performs_cleanup_directory_test() {
   simplifile.is_directory(file) |> should.equal(Ok(False))
 }
 
-fn create_performs_cleanup_even_after_panic() {
-  todo
+pub fn create_performs_cleanup_even_after_panic_test() {
+  let cell = cell.new()
+
+  let assert Error(_) =
+    exception.rescue(fn() {
+      use file <- temporary.create(temporary.file())
+      cell.set(cell, file)
+      panic
+    })
+
+  let assert Ok(file) = cell.get(cell)
+  simplifile.is_file(file) |> should.equal(Ok(False))
 }
 
 pub fn the_file_is_created_test() {
   use file <- temporary.create(temporary.file())
   simplifile.is_file(file) |> should.equal(Ok(True))
+  simplifile.read(file) |> should.equal(Ok(""))
   file
 }
 
 pub fn the_directory_is_created_test() {
   use dir <- temporary.create(temporary.directory())
   simplifile.is_directory(dir) |> should.equal(Ok(True))
+  simplifile.read_directory(dir) |> should.equal(Ok([]))
 }
 
 pub fn suffix_is_added_test() {
