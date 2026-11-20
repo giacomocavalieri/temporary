@@ -2,7 +2,6 @@
 
 [![Package Version](https://img.shields.io/hexpm/v/temporary)](https://hex.pm/packages/temporary)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/temporary/)
-![Supported targets](https://img.shields.io/badge/supports-all_targets-ffaff3)
 
 🗂️ A package to work with temporary files and directories in Gleam!
 

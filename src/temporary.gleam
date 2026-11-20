@@ -23,7 +23,7 @@ type Kind {
 
 /// The description of a new default temporary file.
 ///
-/// It can be customised using the `set_prefix`, `set_suffix` or `in_directory`
+/// It can be customised using the `with_prefix`, `with_suffix` or `in_directory`
 /// functions.
 ///
 pub fn file() -> TempFile {
@@ -37,7 +37,7 @@ pub fn file() -> TempFile {
 
 /// The description of a new default temporary directory.
 ///
-/// It can be customised using the `set_prefix`, `set_suffix` or `in_directory`
+/// It can be customised using the `with_prefix`, `with_suffix` or `in_directory`
 /// functions.
 ///
 pub fn directory() -> TempFile {
